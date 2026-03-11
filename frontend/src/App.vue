@@ -90,7 +90,9 @@ import TimelineCard from './components/TimelineCard.vue'
 import DashboardSection from './components/DashboardSection.vue'
 
 // 配置 axios 基础路径
-axios.defaults.baseURL = 'http://localhost:8081'
+// 开发环境：直连本地 Spring Boot
+// 部署环境（Nginx 反代）：保持同源，避免 CORS
+axios.defaults.baseURL = import.meta.env.DEV ? 'http://localhost:8081' : ''
 
 const { locale, t } = useI18n()
 const currentTime = ref('')
